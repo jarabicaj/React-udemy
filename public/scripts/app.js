@@ -1,76 +1,104 @@
-"use strict";
+'use strict';
 
-var options = [];
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var addOption = function addOption(e) {
-    e.preventDefault();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-    var option = e.target.elements.option.value;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    if (option) {
-        options.push(option);
-        e.target.elements.option.value = '';
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Person = function () {
+    function Person() {
+        var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'Anonymous';
+        var age = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+        _classCallCheck(this, Person);
+
+        //default if argument is empty
+        this.name = name; // individual instances
+        this.age = age;
     }
-    render();
-};
 
-var removeAll = function removeAll() {
-    options = [];
-    render();
-};
+    _createClass(Person, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            return 'Hi, I am ' + this.name + '!';
+        }
+    }, {
+        key: 'getDescription',
+        value: function getDescription() {
+            return this.name + ' is ' + this.age + ' year(s) old.';
+        }
+    }]);
 
-var makeDecision = function makeDecision() {
-    var numberOfOption = Math.floor(Math.random() * options.length);
-    alert(options[numberOfOption]);
-};
+    return Person;
+}();
 
-var render = function render() {
-    var template = React.createElement(
-        "div",
-        null,
-        React.createElement(
-            "h1",
-            null,
-            "My React page"
-        ),
-        React.createElement(
-            "h2",
-            null,
-            "This is some text"
-        ),
-        React.createElement(
-            "form",
-            { onSubmit: addOption },
-            React.createElement("input", { name: "option", type: "text" }),
-            React.createElement(
-                "button",
-                null,
-                "Send"
-            )
-        ),
-        React.createElement(
-            "button",
-            { disabled: options.length === 0, onClick: removeAll },
-            "Delete all"
-        ),
-        React.createElement(
-            "button",
-            { onClick: makeDecision },
-            "Make Decision"
-        ),
-        React.createElement(
-            "ol",
-            null,
-            options.map(function (option) {
-                return React.createElement(
-                    "li",
-                    { key: option },
-                    option
-                );
-            })
-        )
-    );
-    ReactDOM.render(template, document.getElementById('app'));
-};
+var Student = function (_Person) {
+    _inherits(Student, _Person);
 
-render();
+    //subclass of class Person
+    function Student(name, age, major) {
+        _classCallCheck(this, Student);
+
+        //call the parent constructor function
+        var _this = _possibleConstructorReturn(this, (Student.__proto__ || Object.getPrototypeOf(Student)).call(this, name, age));
+
+        _this.major = major;
+        return _this;
+    }
+
+    _createClass(Student, [{
+        key: 'hasMajor',
+        value: function hasMajor() {
+            return !!this.major; // if exists -> return true; if not -> return false
+        }
+    }, {
+        key: 'getDescription',
+        value: function getDescription() {
+            var description = _get(Student.prototype.__proto__ || Object.getPrototypeOf(Student.prototype), 'getDescription', this).call(this);
+
+            if (this.hasMajor()) {
+                description += ' Their major is ' + this.major;
+            }
+            return description;
+        }
+    }]);
+
+    return Student;
+}(Person);
+
+var Traveler = function (_Person2) {
+    _inherits(Traveler, _Person2);
+
+    function Traveler(name, age, homeLocation) {
+        _classCallCheck(this, Traveler);
+
+        var _this2 = _possibleConstructorReturn(this, (Traveler.__proto__ || Object.getPrototypeOf(Traveler)).call(this, name, age));
+
+        _this2.homeLocation = homeLocation;
+        return _this2;
+    }
+
+    _createClass(Traveler, [{
+        key: 'getGreeting',
+        value: function getGreeting() {
+            var greeting = _get(Traveler.prototype.__proto__ || Object.getPrototypeOf(Traveler.prototype), 'getGreeting', this).call(this);
+            if (this.homeLocation) {
+                return greeting += ' I\'m visiting from ' + this.homeLocation + '.';
+            }
+            return greeting;
+        }
+    }]);
+
+    return Traveler;
+}(Person);
+
+var me = new Student('Andrew Mead', 26, 'Computer Science');
+console.log(me.getDescription());
+
+var other = new Student();
+console.log(other.getDescription());
