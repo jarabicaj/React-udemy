@@ -15,7 +15,7 @@ module.exports = {
             exclude: /node_modules/ // ked pozera js file nepozera do node modules
         },{
 
-            test: /\.scss$/,
+            test: /\.s?css$/, // css and scss
             use: [
                 'style-loader',
                 'css-loader',
