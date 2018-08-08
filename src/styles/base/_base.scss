@@ -4,6 +4,7 @@ html {
 
 body {
   font-family: Helvetica, Arial, sans; //if not supported goes on
-  font-size: 1.6rem;
+  font-size: $m-size;
+  background: $off-dark-blue;
 }
 
