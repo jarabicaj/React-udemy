@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Džejo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add live-server babel-cli@6.24.1
+  C:\Program Files\nodejs\node.exe C:\Users\Džejo\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add webpack@3.1.0
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Calibre2\;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Users\Džejo\AppData\Local\Microsoft\WindowsApps;C:\Users\Džejo\AppData\Local\atom\bin;C:\Users\Džejo\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;C:\Users\Džejo\AppData\Roaming\npm
@@ -33,9 +33,15 @@ npm manifest:
     "main": "index.js",
     "author": "Jozef Jarabica",
     "license": "MIT",
+    "scripts":{
+      "serve":"live-server public/",
+      "build":"babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    },
     "dependencies": {
+      "babel-cli": "^6.24.1",
       "babel-preset-env": "1.5.2",
-      "babel-preset-react": "6.24.1"
+      "babel-preset-react": "6.24.1",
+      "live-server": "^1.2.0"
     }
   }
 
