@@ -1,8 +1,7 @@
 import React from "react";
 import Header from "./Header";
 
-const Action = (props) => { // this function is equivalent to render
-    return (
+const Action = (props) =>  (
         <div>
             <button
                 onClick={props.handlePick}
@@ -11,7 +10,6 @@ const Action = (props) => { // this function is equivalent to render
                 What should I do?
             </button>
         </div>
-    )
-};
+);
 
 export default Action;
