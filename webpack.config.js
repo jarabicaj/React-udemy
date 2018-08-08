@@ -14,5 +14,9 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/ // ked pozera js file nepozera do node modules
         }]
+    },
+    devtool: "cheap-module-eval-source-map",
+    devServer: {
+        contentBase: path.join(__dirname, 'public')
     }
 };
